@@ -3,10 +3,12 @@ import { BrowserWindow } from 'electron';
 import { createWindow } from './window';
 import { createTables } from './infra/database/migrations/create-tables';
 import { registerUserController } from './modules/user/controllers/user.controller';
+import { registerAuthController } from './modules/auth/controllers/auth.controller';
 
 app.whenReady().then(() => {
   createTables();
   registerUserController();
+  registerAuthController();
   createWindow();
 
   app.on('activate', () => {

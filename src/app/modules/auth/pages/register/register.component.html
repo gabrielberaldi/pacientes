@@ -19,18 +19,37 @@
           <button
             mat-icon-button
             matSuffix
+            type="button"
             (click)="showPassword = !showPassword"
             [attr.aria-label]="'Hide password'">
             <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         <mat-error>Senha é obrigatória</mat-error>
       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Confirmar Senha</mat-label>
+        <input matInput formControlName="confirmacaoSenha" [type]="!showPassword ? 'password' : 'text'" />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="showPassword = !showPassword"
+            [attr.aria-label]="'Hide password'">
+            <mat-icon>{{! showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        <mat-error>Confirmacao senha é obrigatória</mat-error>
+      </mat-form-field>
+      
+      <mat-error *ngIf="form.hasError('senhaNaoConfere')">Senhas não conferem</mat-error>
+
+      <a routerLink="/auth/login">Voltar para login</a>
+
       <button 
         color="primary" 
         mat-raised-button 
         type="submit"
         [disabled]="form.invalid">
-        Entrar
+        Cadastrar
       </button>
     </form>
   </mat-card>

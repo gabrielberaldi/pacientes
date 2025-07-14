@@ -1,6 +1,6 @@
 import { ipcMain } from "electron";
 import { UserService } from "../services/user.service";
-import { UserModel } from "../models/user.model";
+import { User } from "../models/user.model";
 
 export function registerUserController() {
 
@@ -17,11 +17,11 @@ export function registerUserController() {
     return user;
   });
 
-  ipcMain.handle('user:create', async (_event, user: UserModel) => {
+  ipcMain.handle('user:create', async (_event, user: User) => {
     return await UserService.createUser(user);
   });
 
-  ipcMain.handle('user:update', async (_event, user: UserModel) => {
+  ipcMain.handle('user:update', async (_event, user: User) => {
     return await UserService.updateUser(user);
   });
 

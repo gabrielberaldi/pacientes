@@ -1,11 +1,12 @@
 import db from "../../../infra/database/connection";
-import { UserModel } from "../models/user.model";
+import { UserRegisterDto } from "../models/user-register-dto.model";
+import { User } from "../models/user.model";
 
 export class UserRepository {
 
-  static getAll(): Promise<UserModel[]> {
+  static getAll(): Promise<User[]> {
     return new Promise((resolve, reject) => {
-      db.all<UserModel>("SELECT id, nome, email FROM users", (err, rows) => {
+      db.all<User>("SELECT id, nome, email, data_criacao FROM users", (err, rows) => {
         if (err) {
           reject(err);
         } else {
@@ -15,9 +16,9 @@ export class UserRepository {
     });
   }
 
-  static async getById(id: number): Promise<UserModel | undefined> {
+  static async getById(id: number): Promise<User | undefined> {
     return new Promise((resolve, reject) => {
-      db.get<UserModel>("SELECT id, nome, email FROM users WHERE id = ?", [id], (err, rows) => {
+      db.get<User>("SELECT id, nome, email , data_criacao FROM users WHERE id = ?", [id], (err, rows) => {
         if (err) {
           reject(err);
         } else {
@@ -27,26 +28,25 @@ export class UserRepository {
     });
   }
 
-  static async getByEmail(email: string): Promise<UserModel | undefined> {
+  static async getByEmail(email: string): Promise<User> {
     return new Promise((resolve, reject) => {
-      db.get<UserModel>("SELECT id, nome, email FROM users WHERE email = ?", [email], (err, row) => {
+      db.get<User>("SELECT id, nome, email, senha, data_criacao FROM users WHERE email = ?", [email], (err, row) => {
         if (err) reject(err);
         else resolve(row);
       });
     });
   }
 
-  static async create(user: UserModel): Promise<void> {
+  static async create(user: UserRegisterDto): Promise<number> {
     return new Promise((resolve, reject) => {
-      const currentDate = new Date().toISOString();
-      db.run("INSERT INTO users (nome, email) VALUES (?, ?)", [user.nome, user.email, currentDate], (err) =>  {
+      db.run("INSERT INTO users (nome, email, senha) VALUES (?, ?, ?)", [user.nome, user.email, user.senha], function (err) {
         if (err) reject(err);
-        else resolve();
+        else resolve(this.lastID);
       });
     });
   }
 
-  static async update(user: UserModel): Promise<void> {
+  static async update(user: User): Promise<void> {
     return new Promise((resolve, reject) => {
       db.run("UPDATE users SET nome = ?, email = ? WHERE id = ?", [user.nome, user.email, user.id], (err) => {
         if (err) reject(err);

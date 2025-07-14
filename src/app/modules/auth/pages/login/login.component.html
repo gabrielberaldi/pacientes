@@ -10,16 +10,18 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Senha</mat-label>
-        <input matInput formControlName="senha" [type]="showPassword ? 'password' : 'text'" />
+        <input matInput formControlName="senha" [type]="!showPassword ? 'password' : 'text'" />
           <button
             mat-icon-button
             matSuffix
+            type="button"
             (click)="showPassword = !showPassword"
             [attr.aria-label]="'Hide password'">
-            <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-icon>{{ !showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         <mat-error>Senha é obrigatória</mat-error>
       </mat-form-field>
+      <a routerLink="/auth/register"> Cadastrar </a>
       <button 
         color="primary" 
         mat-raised-button 

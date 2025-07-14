@@ -1,14 +1,14 @@
 
-import { UserModel } from "../models/user.model";
+import { User } from "../models/user.model";
 import { UserRepository } from "../repositories/user.repository";
 
 export class UserService { 
 
- static async getAllUsers(): Promise<UserModel[]> {
+  static async getAllUsers(): Promise<User[]> {
     return await UserRepository.getAll();
   }
 
-  static async getUserById(id: number): Promise<UserModel | undefined> {
+  static async getUserById(id: number): Promise<User | undefined> {
     const user = await UserRepository.getById(id);
     if (!user) {
       throw new Error(`User with id ${id} not found`);
@@ -16,7 +16,7 @@ export class UserService {
     return user;
   }
 
-  static async getUserByEmail(email: string): Promise<UserModel | undefined> {
+  static async getUserByEmail(email: string): Promise<User | undefined> {
     const user = await UserRepository.getByEmail(email);
      if (!user) {
       throw new Error(`User with email ${email} not found`);
@@ -24,7 +24,7 @@ export class UserService {
     return user;
   }
 
-  static async createUser(user: UserModel): Promise<void> {
+  static async createUser(user: User): Promise<void> {
     if (!user.nome || !user.email) {
       throw new Error('Nome e email são obrigatórios.');
     }
@@ -37,7 +37,7 @@ export class UserService {
     await UserRepository.create(user);
   }
 
-  static async updateUser(user: UserModel): Promise<void> {
+  static async updateUser(user: User): Promise<void> {
     if (!user.id) {
       throw new Error('ID do usuário é obrigatório para atualizar.');
     }
