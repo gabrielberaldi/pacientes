@@ -1,0 +1,21 @@
+
+.register-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+mat-card {
+  width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+}
+

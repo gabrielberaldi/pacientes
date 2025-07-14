@@ -1,0 +1,37 @@
+<div class="register-container">
+  <mat-card>
+    <h2>Registrar</h2>
+    <form [formGroup]="form" (ngSubmit)="register()">
+      <mat-form-field class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" type="text" />
+        <mat-error>Nome é obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+        <mat-error *ngIf="controls['email'].hasError('required')">Email é obrigatório</mat-error>
+        <mat-error *ngIf="controls['email'].hasError('email')">Email inválido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="senha" [type]="showPassword ? 'password' : 'text'" />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="showPassword = !showPassword"
+            [attr.aria-label]="'Hide password'">
+            <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        <mat-error>Senha é obrigatória</mat-error>
+      </mat-form-field>
+      <button 
+        color="primary" 
+        mat-raised-button 
+        type="submit"
+        [disabled]="form.invalid">
+        Entrar
+      </button>
+    </form>
+  </mat-card>
+</div>
