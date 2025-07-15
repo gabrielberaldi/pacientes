@@ -1,0 +1,1 @@
+export type RequireId<T> = T & { id: number };

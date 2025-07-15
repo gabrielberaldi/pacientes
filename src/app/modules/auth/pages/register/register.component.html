@@ -15,14 +15,14 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Senha</mat-label>
-        <input matInput formControlName="senha" [type]="showPassword ? 'password' : 'text'" />
+        <input matInput formControlName="senha" [type]="!showPassword ? 'password' : 'text'" />
           <button
             mat-icon-button
             matSuffix
             type="button"
-            (click)="showPassword = !showPassword"
+            (click)="!showPassword = !showPassword"
             [attr.aria-label]="'Hide password'">
-            <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-icon>{{ !showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         <mat-error>Senha é obrigatória</mat-error>
       </mat-form-field>
@@ -35,15 +35,12 @@
             type="button"
             (click)="showPassword = !showPassword"
             [attr.aria-label]="'Hide password'">
-            <mat-icon>{{! showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            <mat-icon>{{ !showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
-        <mat-error>Confirmacao senha é obrigatória</mat-error>
+        <mat-error *ngIf="controls['confirmacaoSenha'].invalid">Confirmacao senha é obrigatória</mat-error>
+        <mat-error *ngIf="form.hasError('senhaNaoConfere')">Senhas não conferem</mat-error>
       </mat-form-field>
-      
-      <mat-error *ngIf="form.hasError('senhaNaoConfere')">Senhas não conferem</mat-error>
-
       <a routerLink="/auth/login">Voltar para login</a>
-
       <button 
         color="primary" 
         mat-raised-button 

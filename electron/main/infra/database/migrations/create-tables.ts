@@ -16,18 +16,20 @@ export function createTables(): void {
       CREATE TABLE IF NOT EXISTS patients (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
-        data_nascimento DATE NOT NULL,
+        dataNascimento DATE NOT NULL,
         contato TEXT NOT NULL,
-        nome_pai TEXT,
-        nome_mae TEXT,
+        nomePai TEXT NOT NULL,
+        nomeMae TEXT NOT NULL,
         bairro TEXT,
         cep TEXT,
         logradouro TEXT,
-        tipo_logradouro TEXT,
+        tipoLogradouro TEXT,
         numero TEXT,
-        dia_da_sessao TEXT,
-        horario TEXT,
-        evolucao TEXT
+        diaDaSessao TEXT NOT NULL,
+        horario TEXT NOT NULL,
+        evolucao TEXT NOT NULL,
+        dataCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        dataAtualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
 
       CREATE TABLE IF NOT EXISTS patient_documents (
