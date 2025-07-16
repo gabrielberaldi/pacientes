@@ -1,0 +1,64 @@
+/* Ocupa toda a altura da tela */
+.sidenav-container {
+  height: 100vh;
+  background: #f5f5f5; /* cinza claro agradável */
+}
+
+/* Sidenav com cor consistente e sem bordas estranhas */
+.sidenav {
+  width: 240px;
+  background: #ffffff; /* branco puro */
+  border-right: 1px solid #e0e0e0; /* linha de divisão sutil */
+}
+
+/* Torna os itens do menu mais amigáveis ao clique */
+mat-nav-list a.mat-list-item {
+  border-radius: 4px;
+  margin: 4px;
+  padding: 12px;
+}
+
+/* Hover suave */
+mat-nav-list a.mat-list-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Item ativo destacado */
+mat-nav-list a.active {
+  background: rgba(63, 81, 181, 0.1); /* azul suave */
+  color: #3f51b5;
+  font-weight: 500;
+}
+
+/* Topbar fixo */
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Para empurrar botões à direita */
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Conteúdo centralizado e com espaçamento agradável */
+.main-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #fafafa;
+  min-height: calc(100vh - 64px); /* considerando o tamanho padrão do toolbar */
+}
+
+/* Responsividade para mobile opcional */
+@media (max-width: 768px) {
+  .sidenav {
+    width: 200px;
+  }
+
+  .main-content {
+    padding: 16px;
+  }
+}

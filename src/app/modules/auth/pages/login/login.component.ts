@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CurrentUserService } from '../../../../core/services/current-user.service';
 
@@ -29,11 +29,13 @@ export class LoginComponent {
   constructor(
     private _authService: AuthService,
     private _currentUserService: CurrentUserService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _router: Router
   ) {}
 
   login(): void {
-    this._authService.login(this.form.getRawValue()).subscribe(user => this._currentUserService.loggedUser.set(user));
+    this._router.navigateByUrl('/layout')
+    // this._authService.login(this.form.getRawValue()).subscribe(user => this._currentUserService.loggedUser.set(user));
   }
 
   get controls(): Record<string, FormControl> {
