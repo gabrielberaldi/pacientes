@@ -4,17 +4,18 @@ import { LayoutComponent } from './layout.component';
 import { Route, RouterModule } from '@angular/router';
 
 const routes: Route[] = [
-  { 
-    path: 'patient', 
-    component: LayoutComponent, 
-    loadChildren: () => import('../patient/patient.module').then((m) => m.PatientModule) 
-  },
   {
     path: '',
-    redirectTo: 'patient',
-    pathMatch: 'full'
+    component: LayoutComponent,
+    children: [
+      { 
+        path: 'patient', 
+        loadChildren: () => import('../patient/patient.module').then(m => m.PatientModule)
+      },
+      { path: '', redirectTo: 'patient', pathMatch: 'full' }
+    ]
   }
-]
+];
 
 @NgModule({
   declarations: [],
