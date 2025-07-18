@@ -1,1 +1,7 @@
-<p>patient-list works!</p>
+<app-table
+  [columns]="columns"
+  [data]="data()"
+  [displayedColumns]="displayedColumns"
+  filterPlaceholder="Search users..."
+  noDataMessage="No users found">
+</app-table>
