@@ -1,23 +1,9 @@
-<!-- <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav class="sidenav" mode="side" opened>
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/layout/patient" routerLinkActive="item-active" #rla="routerLinkActive">
-        <span class="item-content">
-          <mat-icon>person</mat-icon>
-          Pacientes 
-        </span>
-      </a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar>
-      <span>Gestão de Pacientes</span>
-      <span class="spacer"></span>
-      <button color="primary" mat-button>Logout</button>
-    </mat-toolbar>
-    <main class="main-content">
-      <router-outlet></router-outlet>
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
+<nb-layout>
+  <nb-layout-header fixed>Company Name</nb-layout-header>
+  <nb-sidebar>
+    <nb-menu [items]="menuItems"></nb-menu>
+  </nb-sidebar>
+  <nb-layout-column>
+    <button nbButton>Hello World</button>
+  </nb-layout-column>
+</nb-layout>
