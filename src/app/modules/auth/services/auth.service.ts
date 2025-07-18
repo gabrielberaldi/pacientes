@@ -17,7 +17,7 @@ export class AuthService extends BaseIpcService<CurrentUser> {
     return from(window.electron.invoke<CurrentUser>('auth:login', user))
       .pipe(
         catchError((error: Error) => { 
-          throw this._snackBar.open(error.message);
+          throw window.alert(error.message)
         }
     ));
   }
@@ -26,7 +26,7 @@ export class AuthService extends BaseIpcService<CurrentUser> {
     return from(window.electron.invoke<CurrentUser>('auth:register', user))
       .pipe(
         catchError((error: Error) => { 
-          throw this._snackBar.open(error.message);
+          throw window.alert(error.message)
         }
     ));
   }

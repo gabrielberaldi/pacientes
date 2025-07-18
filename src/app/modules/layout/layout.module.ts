@@ -8,11 +8,11 @@ const routes: Route[] = [
     path: '',
     component: LayoutComponent,
     children: [
-      { 
-        path: 'patient', 
-        loadChildren: () => import('../patient/patient.module').then(m => m.PatientModule)
-      },
-      { path: '', redirectTo: 'patient', pathMatch: 'full' }
+      // { 
+      //   path: 'patient', 
+      //   loadChildren: () => import('../patient/patient.module').then(m => m.PatientModule)
+      // },
+      // { path: '', redirectTo: 'patient', pathMatch: 'full' }
     ]
   }
 ];

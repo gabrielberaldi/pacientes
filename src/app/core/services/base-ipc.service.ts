@@ -1,6 +1,5 @@
 
 import { catchError, from, Observable, tap } from 'rxjs';
-import { MatSnackBar} from '@angular/material/snack-bar';
 import { inject } from '@angular/core';
 
 export abstract class BaseIpcService<T> {
@@ -8,7 +7,7 @@ export abstract class BaseIpcService<T> {
   // private readonly _alertService = inject(AlertService);
   // private readonly _storageService = inject(StorageService);
 
-   protected _snackBar = inject(MatSnackBar);
+  //  protected _snackBar = inject(MatSnackBar);
 
   constructor(
     private _path: string
@@ -17,7 +16,7 @@ export abstract class BaseIpcService<T> {
   getAll(): Observable<T[]> {
     return from(window.electron.invoke<T[]>(`${this._path}:getAll`))
       .pipe(catchError((error: Error) => { 
-        throw this._snackBar.open(error.message);
+        throw window.alert(error.message)
       }
     ));
   }
@@ -25,7 +24,7 @@ export abstract class BaseIpcService<T> {
   getById(id: number): Observable<T> {
     return from(window.electron.invoke<T>(`${this._path}:getById`, { id }))
       .pipe(catchError((error: Error) => { 
-        throw this._snackBar.open(error.message);;
+        throw window.alert(error.message);
       }
     ));
   }
@@ -35,7 +34,7 @@ export abstract class BaseIpcService<T> {
       .pipe(
         // tap(() => this._alertService.success('Registro criado com sucesso!')),
         catchError((error: Error) => { 
-          throw this._snackBar.open(error.message);
+          throw window.alert(error.message)
         }
     ));
   }
@@ -45,7 +44,7 @@ export abstract class BaseIpcService<T> {
       .pipe(
         // tap(() => this._alertService.success('Registro atualizado com sucesso!')),
         catchError((error: Error) => { 
-          throw this._snackBar.open(error.message);
+          throw window.alert(error.message)
         }
     ));
   }

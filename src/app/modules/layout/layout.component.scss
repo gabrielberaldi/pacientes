@@ -25,23 +25,24 @@ mat-nav-list {
   }
 }
 
-// .sidebar-list.mdc-list .menu-list-item {
-//   height: 45px;
-//   padding: 8px 10px !important;
-//   margin-bottom: 2px;
-//   border: 1px red solid;
-// }
-
-
 .item-active {
   background: #c05cd7;
-  color: white;
+
+  .mat-icon,
+  .item-content,
+  .mat-line {
+    color: white !important;
+  }
 }
 
 mat-toolbar {
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+
+mat-icon {
+  font-size: 20px;
 }
 
 .spacer {
