@@ -21,6 +21,8 @@ export class AppComponent {
   registerIcons(): void { 
     this._nbIconLibraries.registerSvgPack('hero-icons', {
       'edit': 'assets/hero-icons/edit.svg',
+      'plus': 'assets/hero-icons/plus.svg',
+      'trash': 'assets/hero-icons/trash.svg',
     });
     this._nbIconLibraries.setDefaultPack('hero-icons');
   }
