@@ -17,7 +17,9 @@ export class PatientService {
   }
 
   static async createPatient(patientDto: PatientRegisterDto): Promise<Patient> {
-    const id = await PatientRepository.create(patientDto);
+    const dtoToPersist = { ...patientDto };
+    dtoToPersist.dataNascimento = new Date(dtoToPersist.dataNascimento).toISOString().split('T')[0];
+    const id = await PatientRepository.create(dtoToPersist);
     const patient = await PatientRepository.getById(id);
     if (!patient) throw new Error('Erro ao buscar paciente após criação');
     return patient;
@@ -26,7 +28,9 @@ export class PatientService {
   static async updatePatient({ id, ...patient }: RequireId<PatientRegisterDto>): Promise<void> {
     const existing = await PatientRepository.getById(id);
     if (!existing) throw new Error(`Paciente com id ${id} não encontrado`);
-    await PatientRepository.update({ id, ...patient });
+    const dtoToPersist = { ...patient };
+    dtoToPersist.dataNascimento = new Date(dtoToPersist.dataNascimento).toISOString().split('T')[0];
+    await PatientRepository.update({ id, ...dtoToPersist });
   }
 
   static async deletePatient(id: number): Promise<void> {
