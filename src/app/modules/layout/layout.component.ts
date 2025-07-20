@@ -22,16 +22,17 @@ export class LayoutComponent {
       title: 'Pacientes',
       icon: 'people-outline',
       link: '/layout/patient',
+      pathMatch: 'prefix'
     },
     {
       title: 'Documentos',
       icon: 'file-text-outline',
-      link: '/layout/documents',
+      link: '/layout',
     },
     {
       title: 'Configurações',
       icon: 'settings-outline',
-      link: '/layout/settings',
+      link: '/layout',
     }
   ]
 
