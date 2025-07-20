@@ -1,14 +1,13 @@
-import { Component, input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input, input } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NbDatepickerModule, NbInputModule, NbOptionModule, NbSelectModule } from '@nebular/theme';
 import { Option } from '../../../../shared/model/option.model';
 import { SessionDay } from '../../models/session-day.enum';
-import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-information',
   standalone: true,
-  imports: [ NbInputModule, NbOptionModule, NbSelectModule, NgFor, NbDatepickerModule],
+  imports: [ NbInputModule, NbOptionModule, NbSelectModule, NbDatepickerModule, ReactiveFormsModule],
   templateUrl: './information.component.html',
   styleUrl: './information.component.scss'
 })
@@ -24,6 +23,15 @@ export class InformationComponent {
     { value: SessionDay.FRIDAY, label: 'Sexta-Feira' },
     { value: SessionDay.SATURDAY, label: 'Sábado' },
     { value: SessionDay.SUNDAY, label: 'Domingo' }
+  ];
+
+  genderOptions: Option<string>[] = [
+    { value: 'M', label: 'Masculino' },
+    { value: 'F', label: 'Feminino' },
   ]
+
+  getControl(name: string): FormControl {
+    return this.formGroup().get(name) as FormControl;
+  }
 
 }

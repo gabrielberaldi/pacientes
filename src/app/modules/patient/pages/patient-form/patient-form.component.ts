@@ -1,6 +1,6 @@
 import { NgFor, NgIf, NgSwitchCase } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NbButtonModule, NbCardModule, NbFormFieldModule, NbTabsetModule } from '@nebular/theme';
 import { PatientService } from '../../services/patient.service';
 import { InformationComponent } from '../../components/information/information.component';
@@ -32,11 +32,30 @@ export class PatientFormComponent {
     evolucao: ['', Validators.required],
   });
 
-  
-  
   constructor(
     private _fb: FormBuilder,
     private _patientService: PatientService
   ) { }
 
+  save(): void {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
+      this.formGroup.markAsDirty();
+      return;
+    }
+    
+  }
+
+  back(): void {
+
+  }
+
+  delete(): void {
+
+  }
+  
+  get id(): AbstractControl | null {
+    return this.formGroup.get('id');
+  }
+  
 }

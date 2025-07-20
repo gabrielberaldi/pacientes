@@ -2,72 +2,100 @@
 
   <div>
     <label>Nome</label>
-    <input nbInput formControlName="nome" placeholder="Digite o nome" />
+    <input nbInput fullWidth placeholder="Digite o nome" [formControl]="getControl('nome')" />
+    @if (getControl('nome').invalid && getControl('nome').touched) {
+      <div style="color: red; font-size: 12px;">Nome é obrigatório</div>
+    }
   </div>
 
   <div>
     <label>Data de Nascimento</label>
-    <input nbInput formControlName="dataNascimento" [nbDatepicker]="datepicker">
+    <input nbInput fullWidth [nbDatepicker]="datepicker" placeholder="Selecione a data" [formControl]="getControl('dataNascimento')" />
     <nb-datepicker #datepicker></nb-datepicker>
+    @if (getControl('dataNascimento').invalid && getControl('dataNascimento').touched) {
+      <div style="color: red; font-size: 12px;">Data de nascimento é obrigatória</div>
+    }
+  </div>
+
+  <div>
+    <label>Gênero</label>
+    <nb-select fullWidth placeholder="Selecione o gênero" [formControl]="getControl('sexo')">
+    @for(gender of genderOptions; track gender.value) {
+      <nb-option [value]="gender.value">
+        {{ gender.label }}
+      </nb-option>
+    }
+    </nb-select>
   </div>
 
   <div>
     <label>Contato</label>
-    <input nbInput formControlName="contato" placeholder="(xx) xxxxx-xxxx" />
+    <input nbInput fullWidth placeholder="(xx) xxxxx-xxxx" [formControl]="getControl('contato')" />
+    @if (getControl('contato').invalid && getControl('contato').touched) {
+      <div style="color: red; font-size: 12px;">Contato é obrigatório</div>
+    }
   </div>
 
   <div>
     <label>Nome do Pai</label>
-    <input nbInput formControlName="nomePai" />
+    <input nbInput fullWidth [formControl]="getControl('nomePai')" />
   </div>
 
   <div>
     <label>Nome da Mãe</label>
-    <input nbInput formControlName="nomeMae" />
+    <input nbInput fullWidth [formControl]="getControl('nomeMae')" />
   </div>
 
   <div>
     <label>Bairro</label>
-    <input nbInput formControlName="bairro" />
+    <input nbInput fullWidth [formControl]="getControl('bairro')" />
   </div>
 
   <div>
     <label>CEP</label>
-    <input nbInput formControlName="cep" />
-  </div>
-
-  <div style="grid-column: span 2;">
-    <label>Logradouro</label>
-    <input nbInput formControlName="logradouro" placeholder="Rua, Avenida..." />
+    <input nbInput fullWidth [formControl]="getControl('cep')" />
   </div>
 
   <div>
     <label>Tipo de Logradouro</label>
-    <input nbInput formControlName="tipoLogradouro" />
+    <input nbInput fullWidth [formControl]="getControl('tipoLogradouro')" />
+  </div>
+ 
+  <div>
+    <label>Logradouro</label>
+    <input nbInput fullWidth placeholder="Rua, Avenida..." [formControl]="getControl('logradouro')" />
   </div>
 
   <div>
     <label>Número</label>
-    <input nbInput formControlName="numero" />
+    <input nbInput fullWidth [formControl]="getControl('numero')" />
   </div>
 
   <div>
-    <label>Dia da Sessão</label>
-    <nb-select formControlName="diaDaSessao" placeholder="Selecione o dia">
-      <nb-option *ngFor="let day of weekDays" [value]="day.value">
-        {{ day.label }}
-      </nb-option>
+    <label>Data Sessao</label>
+    <nb-select fullWidth placeholder="Selecione o dia" [formControl]="getControl('diaDaSessao')">
+      @for(day of weekDays; track day.value) {
+        <nb-option [value]="day.value">
+          {{ day.label }}
+        </nb-option>
+      }
     </nb-select>
   </div>
 
   <div>
     <label>Horário</label>
-    <input nbInput type="time" formControlName="horario" />
+    <input nbInput fullWidth type="time" [formControl]="getControl('horario')" />
+    @if (getControl('horario').invalid && getControl('horario').touched) {
+      <div style="color: red; font-size: 12px;">Horário é obrigatório</div>
+    }
   </div>
 
   <div>
     <label>Evolução</label>
-    <textarea nbInput formControlName="evolucao" placeholder="Digite a evolução"></textarea>
+    <textarea nbInput fullWidth placeholder="Digite a evolução" [formControl]="getControl('evolucao')"></textarea>
+    @if (getControl('evolucao').invalid && getControl('evolucao').touched) {
+      <div style="color: red; font-size: 12px;">Evolução é obrigatória</div>
+    }
   </div>
 
 </div>

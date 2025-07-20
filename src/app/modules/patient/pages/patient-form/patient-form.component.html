@@ -7,9 +7,19 @@
       <nb-tab tabTitle="Evolução">
         Tab content 2
       </nb-tab>
-      <!-- <nb-tab tabTitle="Docs">
-        Tab content 2
-      </nb-tab> -->
     </nb-tabset>
+     <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
+      <button nbButton outline status="success" (click)="save()">
+        Salvar
+      </button>
+      @if(id && !!id.value) {
+      <button nbButton outline status="danger" (click)="delete()">
+        Excluir
+      </button>
+      }
+      <button nbButton outline status="basic" (click)="back()">
+        Voltar
+      </button>
+    </div>
   </nb-card-body>
 </nb-card>
