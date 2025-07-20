@@ -1,0 +1,73 @@
+<div class="content">
+
+  <div>
+    <label>Nome</label>
+    <input nbInput formControlName="nome" placeholder="Digite o nome" />
+  </div>
+
+  <div>
+    <label>Data de Nascimento</label>
+    <input nbInput formControlName="dataNascimento" [nbDatepicker]="datepicker">
+    <nb-datepicker #datepicker></nb-datepicker>
+  </div>
+
+  <div>
+    <label>Contato</label>
+    <input nbInput formControlName="contato" placeholder="(xx) xxxxx-xxxx" />
+  </div>
+
+  <div>
+    <label>Nome do Pai</label>
+    <input nbInput formControlName="nomePai" />
+  </div>
+
+  <div>
+    <label>Nome da Mãe</label>
+    <input nbInput formControlName="nomeMae" />
+  </div>
+
+  <div>
+    <label>Bairro</label>
+    <input nbInput formControlName="bairro" />
+  </div>
+
+  <div>
+    <label>CEP</label>
+    <input nbInput formControlName="cep" />
+  </div>
+
+  <div style="grid-column: span 2;">
+    <label>Logradouro</label>
+    <input nbInput formControlName="logradouro" placeholder="Rua, Avenida..." />
+  </div>
+
+  <div>
+    <label>Tipo de Logradouro</label>
+    <input nbInput formControlName="tipoLogradouro" />
+  </div>
+
+  <div>
+    <label>Número</label>
+    <input nbInput formControlName="numero" />
+  </div>
+
+  <div>
+    <label>Dia da Sessão</label>
+    <nb-select formControlName="diaDaSessao" placeholder="Selecione o dia">
+      <nb-option *ngFor="let day of weekDays" [value]="day.value">
+        {{ day.label }}
+      </nb-option>
+    </nb-select>
+  </div>
+
+  <div>
+    <label>Horário</label>
+    <input nbInput type="time" formControlName="horario" />
+  </div>
+
+  <div>
+    <label>Evolução</label>
+    <textarea nbInput formControlName="evolucao" placeholder="Digite a evolução"></textarea>
+  </div>
+
+</div>

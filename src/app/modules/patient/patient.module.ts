@@ -7,6 +7,7 @@ import { PatientListComponent } from './pages/patient-list/patient-list.componen
 const routes: Route[] = [
   { path: 'list', component: PatientListComponent },
   { path: 'edit', component: PatientFormComponent },
+  { path: 'edit/:id', component: PatientFormComponent },
   { path: '', pathMatch: 'full', redirectTo: 'list' }
 ]
 

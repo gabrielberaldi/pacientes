@@ -1,1 +1,15 @@
-<p>patient-form works!</p>
+<nb-card>
+  <nb-card-body [formGroup]="formGroup">
+    <nb-tabset>
+      <nb-tab tabTitle="Informações">
+        <app-information [formGroup]="formGroup"></app-information>
+      </nb-tab>
+      <nb-tab tabTitle="Evolução">
+        Tab content 2
+      </nb-tab>
+      <!-- <nb-tab tabTitle="Docs">
+        Tab content 2
+      </nb-tab> -->
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>

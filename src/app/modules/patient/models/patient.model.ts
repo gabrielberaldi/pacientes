@@ -2,6 +2,7 @@ export interface Patient {
   id?: number;
   nome: string;
   dataNascimento: string;
+  sexo: 'M' | 'F';
   contato: string;
   nomePai: string;
   nomeMae: string;
