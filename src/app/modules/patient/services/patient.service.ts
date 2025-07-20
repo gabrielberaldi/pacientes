@@ -6,7 +6,7 @@ import { PatientList } from '../models/patient-list.model';
 @Injectable({
   providedIn: 'root'
 })
-export class PatientService extends BaseIpcService<Patient, PatientList[]> {
+export class PatientService extends BaseIpcService<Patient, PatientList> {
 
   constructor() {
     super('patient');

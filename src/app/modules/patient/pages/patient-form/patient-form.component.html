@@ -12,10 +12,10 @@
       <button nbButton outline status="success" (click)="save()">
         Salvar
       </button>
-      @if(id && !!id.value) {
-      <button nbButton outline status="danger" (click)="delete()">
-        Excluir
-      </button>
+      @if (!!id.value) {
+        <button nbButton outline status="danger" (click)="delete()">
+          Excluir
+        </button>
       }
       <button nbButton outline status="basic" (click)="back()">
         Voltar

@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { TableComponent } from '../../../../shared/components/table/table.component';
 import { PatientService } from '../../services/patient.service';
 import { PatientList } from '../../models/patient-list.model';
+import { TreeNode } from '../../../../shared/components/table/model/tree-node.model';
 
 @Component({
   selector: 'app-patient-list',
@@ -12,17 +13,15 @@ import { PatientList } from '../../models/patient-list.model';
 })
 export class PatientListComponent {
 
-  columns = [ 'nome', 'idade', 'dataNascimento', 'sexo', 'nomeMae', 'actions' ];
-  data: PatientList[] = [];
+  columns = ['id', 'nome', 'dataNascimento', 'sexo', 'nomeMae', 'actions' ];
+  data: TreeNode<PatientList>[] = [];
 
   constructor(
     private _patientService: PatientService
   ) {}
 
   ngOnInit() {
-    // this._patientService.getAll().subscribe((patients: PatientList[]) => {
-    //   this.data = patients;
-    // });
+    this._patientService.getAll().subscribe(patients => this.data = patients);
   }
 
 }

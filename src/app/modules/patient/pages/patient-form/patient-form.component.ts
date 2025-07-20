@@ -1,9 +1,10 @@
 import { NgFor, NgIf, NgSwitchCase } from '@angular/common';
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NbButtonModule, NbCardModule, NbFormFieldModule, NbTabsetModule } from '@nebular/theme';
 import { PatientService } from '../../services/patient.service';
 import { InformationComponent } from '../../components/information/information.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-form',
@@ -20,8 +21,8 @@ export class PatientFormComponent {
     dataNascimento: ['', Validators.required],
     sexo: [null, Validators.required],
     contato: ['', Validators.required],
-    nomePai: [''],
-    nomeMae: [''],
+    nomePai: ['', Validators.required],
+    nomeMae: ['', Validators.required],
     bairro: [''],
     cep: [''],
     logradouro: [''],
@@ -34,7 +35,8 @@ export class PatientFormComponent {
 
   constructor(
     private _fb: FormBuilder,
-    private _patientService: PatientService
+    private _patientService: PatientService,
+    private _router: Router
   ) { }
 
   save(): void {
@@ -44,18 +46,23 @@ export class PatientFormComponent {
       return;
     }
     
+    console.log(this.formGroup.value);
+
+    this._patientService.create(this.formGroup.value).subscribe(tste => {
+      console.log(tste);
+    })
   }
 
   back(): void {
-
+    this._router.navigate(['/layout/patient']);
   }
 
   delete(): void {
 
   }
   
-  get id(): AbstractControl | null {
-    return this.formGroup.get('id');
+  get id(): FormControl {
+    return this.formGroup.get('id') as FormControl;
   }
   
 }
