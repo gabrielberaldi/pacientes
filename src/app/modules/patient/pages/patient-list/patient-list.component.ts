@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableComponent } from '../../../../shared/components/table/table.component';
 import { PatientService } from '../../services/patient.service';
 import { PatientList } from '../../models/patient-list.model';
@@ -11,7 +11,7 @@ import { TreeNode } from '../../../../shared/components/table/model/tree-node.mo
   templateUrl: './patient-list.component.html',
   styleUrl: './patient-list.component.scss'
 })
-export class PatientListComponent {
+export class PatientListComponent implements OnInit {
 
   columns = ['id', 'nome', 'dataNascimento', 'sexo', 'nomeMae', 'actions' ];
   data: TreeNode<PatientList>[] = [];
@@ -20,7 +20,7 @@ export class PatientListComponent {
     private _patientService: PatientService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this._patientService.getAll().subscribe(patients => this.data = patients);
   }
 

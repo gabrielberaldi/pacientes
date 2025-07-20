@@ -23,7 +23,7 @@ export abstract class BaseIpcService<T, R> {
   }
 
   getById(id: number): Observable<T> {
-    return from(window.electron.invoke<T>(`${this._path}:getById`, { id }))
+    return from(window.electron.invoke<T>(`${this._path}:getById`, id ))
       .pipe(
         catchError((error: Error) => {
           this._nbToastrsService.danger(error.message || 'Erro desconhecido', 'Erro');
