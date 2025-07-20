@@ -13,11 +13,11 @@
           <ng-container [ngSwitch]="column">
             <ng-container *ngSwitchCase="'actions'">
               <button nbButton ghost status="primary" (click)="editRow(row)">
-                <nb-icon icon="edit-outline"></nb-icon>
+                <nb-icon icon="edit" pack="hero-icons"></nb-icon>
               </button>
               <button nbButton ghost status="danger" (click)="deleteRow(row)">
-                <nb-icon icon="trash-outline"></nb-icon>
-            </button>
+                <nb-icon icon="trash" pack="hero-icons"></nb-icon>            
+              </button>
             </ng-container>
             <ng-container *ngSwitchDefault>
               {{ row.data[column] }}

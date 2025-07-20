@@ -1,5 +1,5 @@
 import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 import { NbButtonModule, NbCardModule, NbIconModule, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridModule } from '@nebular/theme';
 
 interface TreeNode<T> {
@@ -29,14 +29,15 @@ export class TableComponent {
   sortColumn = input<string>('');
   sortDirection = input<NbSortDirection>(NbSortDirection.ASCENDING);
 
-  // allColumns = ['name', 'size', 'kind', 'items', 'actions'];
-  dataSource: NbTreeGridDataSource<any>;
+  dataSource!: NbTreeGridDataSource<any>;
 
 
   constructor(
     private _dataSourceBuilder: NbTreeGridDataSourceBuilder<any>
   ) {
-    this.dataSource = this._dataSourceBuilder.create(this.data());
+    effect(() => {
+      this.dataSource = this._dataSourceBuilder.create(this.data());
+    })
   }
 
   editRow(row: any): void {
