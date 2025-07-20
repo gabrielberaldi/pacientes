@@ -1,7 +1,15 @@
 <nb-card>
   <nb-card-body>
-    <label class="search-label" for="search">Search:</label>
-    <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
+    <div class="table-header">
+      <nb-form-field>
+        <nb-icon nbPrefix icon="magnifying-glass"></nb-icon>
+        <input nbInput placeholder="Pesquisar..." status="primary" [nbFilterInput]="dataSource">
+      </nb-form-field>
+      <button nbButton outline size="medium" status="success">
+        <nb-icon icon="plus"></nb-icon>
+        Adicionar
+      </button>
+    </div>
     <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)" >
       <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="columns()"></tr>
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columns()"></tr>
