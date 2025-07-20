@@ -55,7 +55,7 @@ export abstract class BaseIpcService<T, R> {
   }
 
   delete(id: number): Observable<T> {
-    return from(window.electron.invoke<T>(`${this._path}:delete`, { id }))
+    return from(window.electron.invoke<T>(`${this._path}:delete`, id ))
       .pipe(
         tap(() => this._nbToastrsService.success('Registro excluído com sucesso!', 'Sucesso')),
         catchError((error: Error) => {
