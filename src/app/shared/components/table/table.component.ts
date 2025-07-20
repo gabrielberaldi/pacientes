@@ -1,6 +1,6 @@
 import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Component, effect, input } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbFormFieldModule, NbIconModule, NbInputModule, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridModule } from '@nebular/theme';
 
 interface TreeNode<T> {
   data: T;
@@ -8,17 +8,10 @@ interface TreeNode<T> {
   expanded?: boolean;
 }
 
-// interface FSEntry {
-//   name: string;
-//   size: string;
-//   kind: string;
-//   items?: number;
-// }
-
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [ NbTreeGridModule, NbCardModule, NgFor, NbButtonModule, NgSwitch, NgSwitchDefault, NgSwitchCase, NbIconModule ],
+  imports: [ NbTreeGridModule, NbCardModule, NgFor, NbButtonModule, NgSwitch, NgSwitchDefault, NgSwitchCase, NbIconModule, NbInputModule, NbFormFieldModule ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
@@ -31,13 +24,11 @@ export class TableComponent {
 
   dataSource!: NbTreeGridDataSource<any>;
 
-
   constructor(
-    private _dataSourceBuilder: NbTreeGridDataSourceBuilder<any>
+    private _dataSourceBuilder: NbTreeGridDataSourceBuilder<any>,
   ) {
-    effect(() => {
-      this.dataSource = this._dataSourceBuilder.create(this.data());
-    })
+    effect(() => { this.dataSource = this._dataSourceBuilder.create(this.data()); })
+
   }
 
   editRow(row: any): void {
