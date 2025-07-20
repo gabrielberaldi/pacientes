@@ -17,6 +17,7 @@ export function createTables(): void {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
         dataNascimento DATE NOT NULL,
+        sexo CHAR(1) NOT NULL CHECK (sexo IN ('M', 'F')),
         contato TEXT NOT NULL,
         nomePai TEXT NOT NULL,
         nomeMae TEXT NOT NULL,

@@ -1,11 +1,12 @@
 import { RequireId } from "../../utils/requiredId.type";
+import { PatientListDto } from "../models/patient-list-dto.model";
 import { PatientRegisterDto } from "../models/patient-register-dto.model";
 import { Patient } from "../models/patient.model";
 import { PatientRepository } from "../repositories/patient.repository";
 
 export class PatientService {
 
-  static async listAllPatients(): Promise<Patient[]> {
+  static async listAllPatients(): Promise<PatientListDto[]> {
     return PatientRepository.getAll();
   }
 

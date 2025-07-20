@@ -1,12 +1,14 @@
 import db from "../../../infra/database/connection";
 import { RequireId } from "../../utils/requiredId.type";
+import { PatientListDto } from "../models/patient-list-dto.model";
 import { PatientRegisterDto } from "../models/patient-register-dto.model";
 import { Patient } from "../models/patient.model";
 
 export class PatientRepository {
-  static getAll(): Promise<Patient[]> {
+  
+  static getAll(): Promise<PatientListDto[]> {
     return new Promise((resolve, reject) => {
-      db.all<Patient>("SELECT * FROM patients", (err, rows) => {
+      db.all<PatientListDto>("SELECT id, nome, idade, sexo, nomeMae FROM patients", (err, rows) => {
         if (err) reject(err);
         else resolve(rows);
       });
