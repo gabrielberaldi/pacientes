@@ -8,7 +8,7 @@ export class PatientRepository {
   
   static getAll(): Promise<PatientListDto[]> {
     return new Promise((resolve, reject) => {
-      db.all<PatientListDto>("SELECT id, nome, idade, sexo, nomeMae FROM patients", (err, rows) => {
+      db.all<PatientListDto>("SELECT id, nome, sexo, dataNascimento, nomeMae FROM patients", (err, rows) => {
         if (err) reject(err);
         else resolve(rows);
       });
@@ -28,15 +28,16 @@ export class PatientRepository {
     return new Promise((resolve, reject) => {
       const query = `
         INSERT INTO patients (
-          nome, dataNascimento, contato, nomePai, nomeMae, bairro,
+          nome, dataNascimento, sexo, contato, nomePai, nomeMae, bairro,
           cep, logradouro, tipoLogradouro, numero, diaDaSessao,
           horario, evolucao
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
 
       const values = [
         patient.nome,
         patient.dataNascimento,
+        patient.sexo,    
         patient.contato,
         patient.nomePai,
         patient.nomeMae,

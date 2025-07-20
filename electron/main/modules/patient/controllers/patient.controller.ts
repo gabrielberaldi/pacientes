@@ -3,7 +3,7 @@ import { PatientRegisterDto } from '../models/patient-register-dto.model';
 import { PatientService } from '../services/patient.service';
 import { RequireId } from '../../utils/requiredId.type';
 
-export function registerPatientHandlers() {
+export function registerPatientController() {
   ipcMain.handle('patient:getAll', async () => {
     return await PatientService.listAllPatients();
   });
