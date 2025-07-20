@@ -1,5 +1,6 @@
 import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Component, effect, input } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbButtonModule, NbCardModule, NbFormFieldModule, NbIconModule, NbInputModule, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridModule } from '@nebular/theme';
 
 interface TreeNode<T> {
@@ -18,7 +19,7 @@ interface TreeNode<T> {
 export class TableComponent {
 
   columns = input.required<string[]>();
-  data = input.required<any[]>();
+  data = input.required<TreeNode<any>[]>();
   sortColumn = input<string>('');
   sortDirection = input<NbSortDirection>(NbSortDirection.ASCENDING);
 
@@ -26,6 +27,7 @@ export class TableComponent {
 
   constructor(
     private _dataSourceBuilder: NbTreeGridDataSourceBuilder<any>,
+    private _router: Router
   ) {
     effect(() => { this.dataSource = this._dataSourceBuilder.create(this.data()); })
 
@@ -47,6 +49,10 @@ export class TableComponent {
   updateSort(sortRequest: NbSortRequest): void {
     // this.sortColumn = sortRequest.column;
     // this.sortDirection = sortRequest.direction;
+  }
+
+  add(): void {
+    this._router.navigate(['/layout/patient/edit']);
   }
 
   // private data: TreeNode<FSEntry>[] = [

@@ -5,7 +5,7 @@
         <nb-icon nbPrefix icon="magnifying-glass"></nb-icon>
         <input nbInput placeholder="Pesquisar..." status="primary" [nbFilterInput]="dataSource">
       </nb-form-field>
-      <button nbButton outline size="medium" status="success">
+      <button nbButton outline size="medium" status="success" (click)="add()">
         <nb-icon icon="plus"></nb-icon>
         Adicionar
       </button>
