@@ -21,10 +21,10 @@
           <td nbTreeGridCell *nbTreeGridCellDef="let row">
             <ng-container [ngSwitch]="column">
               <ng-container *ngSwitchCase="'actions'">
-                <button nbButton ghost status="primary" (click)="editRow(row)">
+                <button nbButton ghost status="primary" (click)="edit(row)">
                   <nb-icon icon="edit" pack="hero-icons"></nb-icon>
                 </button>
-                <button nbButton ghost status="danger" (click)="deleteRow(row)">
+                <button nbButton ghost status="danger" (click)="delete(row)">
                   <nb-icon icon="trash" pack="hero-icons"></nb-icon>            
                 </button>
               </ng-container>

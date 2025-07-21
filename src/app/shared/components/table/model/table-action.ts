@@ -1,0 +1,1 @@
+export type TableAction = 'add' | 'edit' | 'delete';

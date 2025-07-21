@@ -1,7 +1,8 @@
 import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
-import { Component, effect, input } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbButtonModule, NbCardModule, NbFormFieldModule, NbIconModule, NbInputModule, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridModule } from '@nebular/theme';
+import { TableEvent } from './model/table-event.model';
 
 interface TreeNode<T> {
   data: T;
@@ -20,25 +21,30 @@ export class TableComponent {
 
   columns = input.required<string[]>();
   data = input.required<TreeNode<any>[]>();
+  dataSource!: NbTreeGridDataSource<any>;
   sortColumn = input<string>('');
   sortDirection = input<NbSortDirection>(NbSortDirection.ASCENDING);
 
-  dataSource!: NbTreeGridDataSource<any>;
+  event = output<TableEvent<any>>()
 
   constructor(
     private _dataSourceBuilder: NbTreeGridDataSourceBuilder<any>,
     private _router: Router
   ) {
     effect(() => { this.dataSource = this._dataSourceBuilder.create(this.data()); })
-
   }
 
-  editRow(row: any): void {
-    console.log(row, ' row');
+  add(): void {
+    this._router.navigate(['/layout/patient/edit']);
+    this.event.emit({ action: 'add' });
   }
 
-  deleteRow(row: any): void { 
-    console.log('Delete row:', row);
+  edit({ data }: TreeNode<any>): void {
+    this.event.emit({ action: 'edit', data });
+  }
+
+  delete({ data }: TreeNode<any>): void { 
+    this.event.emit({ action: 'delete', data });
   }
 
   getSortDirection(column: string): NbSortDirection {
@@ -51,18 +57,6 @@ export class TableComponent {
     // this.sortDirection = sortRequest.direction;
   }
 
-  add(): void {
-    this._router.navigate(['/layout/patient/edit']);
-  }
-
-  // private data: TreeNode<FSEntry>[] = [
-  //   { data: { name: 'project-1.doc', kind: 'doc', size: '240 KB', items: 1 } },
-  //   { data: { name: 'project-2.doc', kind: 'doc', size: '290 KB', items: 1 } },
-  //   { data: { name: 'project-3A.doc', kind: 'doc', size: '200 KB', items: 1 } },
-  //   { data: { name: 'project-3B.doc', kind: 'doc', size: '266 KB', items: 1 } },
-  //   { data: { name: 'project-4.docx', kind: 'docx', size: '900 KB', items: 1 } },
-  //   { data: { name: 'backup.bkp', kind: 'bkp', size: '107 MB', items: 1 } },
-  //   { data: { name: 'secret-note.txt', kind: 'txt', size: '2 MB', items: 1 } },
-  // ];
-
+ 
+ 
 }
