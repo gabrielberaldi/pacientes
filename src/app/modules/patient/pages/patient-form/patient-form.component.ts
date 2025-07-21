@@ -64,7 +64,11 @@ export class PatientFormComponent implements OnInit {
 
   private _getData(): void {
     const id = Number(this._actvatedRoute.snapshot.params['id']);
-    if (!!id) this._patientService.getById(id).subscribe(patient => this.formGroup.patchValue(patient));
+    if (!!id) this._patientService.getById(id).subscribe(patient => {
+      console.log(patient, 'patient');
+      
+      this.formGroup.patchValue(patient)
+    });
     console.log(this.formGroup.value, 'formGroup value');
   }
   

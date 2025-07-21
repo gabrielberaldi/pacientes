@@ -3,6 +3,7 @@ import { TableComponent } from '../../../../shared/components/table/table.compon
 import { PatientService } from '../../services/patient.service';
 import { PatientList } from '../../models/patient-list.model';
 import { TreeNode } from '../../../../shared/components/table/model/tree-node.model';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-patient-list',
@@ -13,15 +14,23 @@ import { TreeNode } from '../../../../shared/components/table/model/tree-node.mo
 })
 export class PatientListComponent implements OnInit {
 
-  columns = ['id', 'nome', 'dataNascimento', 'sexo', 'nomeMae', 'actions' ];
+  columns = ['id', 'nome', 'dataNascimento', 'sexo', 'nomeMae', 'actions'];
   data: TreeNode<PatientList>[] = [];
 
   constructor(
     private _patientService: PatientService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this._patientService.getAll().subscribe(patients => this.data = patients);
+    this._patientService.getAll().subscribe(patients => {
+      this.data = patients.map(patient => ({
+        ...patient,
+        data: {
+          ...patient.data,
+          dataNascimento: formatDate(patient.data.dataNascimento, 'dd/MM/yyyy', 'pt-BR')
+        }
+      }));
+    });
   }
 
 }

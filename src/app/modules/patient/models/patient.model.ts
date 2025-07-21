@@ -14,6 +14,4 @@ export interface Patient {
   diaDaSessao: number;
   horario: string;
   evolucao: string;
-  // dataCriacao: string;
-  // dataAtualizacao: string;
 }
