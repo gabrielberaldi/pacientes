@@ -1,7 +1,7 @@
 export interface PatientListDto {
   id: number;
   nome: string;
-  dataNascimento: Date;
+  dataNascimento: string;
   sexo: 'M' | 'F';
   nomeMae: string
 }

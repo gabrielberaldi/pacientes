@@ -5,6 +5,7 @@ import { NbButtonModule, NbCardModule, NbFormFieldModule, NbTabsetModule } from 
 import { PatientService } from '../../services/patient.service';
 import { InformationComponent } from '../../components/information/information.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { parse, parseISO } from 'date-fns'
 
 @Component({
   selector: 'app-patient-form',
@@ -65,11 +66,8 @@ export class PatientFormComponent implements OnInit {
   private _getData(): void {
     const id = Number(this._actvatedRoute.snapshot.params['id']);
     if (!!id) this._patientService.getById(id).subscribe(patient => {
-      console.log(patient, 'patient');
-      
-      this.formGroup.patchValue(patient)
+      this.formGroup.patchValue({ ...patient, dataNascimento: parseISO(patient.dataNascimento) })
     });
-    console.log(this.formGroup.value, 'formGroup value');
   }
   
   get id(): FormControl {

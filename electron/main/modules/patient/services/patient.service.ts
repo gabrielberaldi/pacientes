@@ -7,14 +7,12 @@ import { PatientRepository } from "../repositories/patient.repository";
 export class PatientService {
 
   static async listAllPatients(): Promise<PatientListDto[]> {
-    const patients = await PatientRepository.getAll();
-    return patients.map(patient => ({...patient, dataNascimento: new Date(patient.dataNascimento) }));
+    return await PatientRepository.getAll();
   }
 
   static async getPatientById(id: number): Promise<Patient> {
     const patient = await PatientRepository.getById(id);
     if (!patient) throw new Error(`Paciente com id ${id} não encontrado`);
-    patient.dataNascimento = new Date(patient.dataNascimento);
     return patient;
   }
 
