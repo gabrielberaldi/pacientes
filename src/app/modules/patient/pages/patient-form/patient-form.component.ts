@@ -6,11 +6,12 @@ import { PatientService } from '../../services/patient.service';
 import { InformationComponent } from '../../components/information/information.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { parse, parseISO } from 'date-fns'
+import { EvolutionComponent } from '../../components/evolution/evolution.component';
 
 @Component({
   selector: 'app-patient-form',
   standalone: true,
-  imports: [ NbTabsetModule, NbCardModule, NbButtonModule, NbFormFieldModule, ReactiveFormsModule, NgIf, NgFor, NgSwitchCase, InformationComponent ],
+  imports: [ NbTabsetModule, NbCardModule, NbButtonModule, NbFormFieldModule, ReactiveFormsModule, NgIf, NgFor, NgSwitchCase, InformationComponent, EvolutionComponent ],
   templateUrl: './patient-form.component.html',
   styleUrl: './patient-form.component.scss'
 })
@@ -31,6 +32,7 @@ export class PatientFormComponent implements OnInit {
     numero: [''],
     diaDaSessao: [null, Validators.required],
     horario: ['', Validators.required],
+    evolucoes: this._fb.array([])
   });
 
   constructor(

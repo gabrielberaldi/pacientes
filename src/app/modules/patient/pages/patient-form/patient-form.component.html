@@ -4,8 +4,8 @@
       <nb-tab tabTitle="Informações">
         <app-information [formGroup]="formGroup"></app-information>
       </nb-tab>
-      <nb-tab tabTitle="Evolução">
-        Tab content 2
+      <nb-tab tabTitle="Evolução" [disabled]="!id.value">
+        <app-evolution [formGroup]="formGroup"></app-evolution>
       </nb-tab>
     </nb-tabset>
      <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">

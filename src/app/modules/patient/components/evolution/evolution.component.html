@@ -1,0 +1,21 @@
+<div style="display: flex; flex-direction: column; gap: 20px;">
+  <button nbButton status="success" style="float: right;" (click)="addEvolution()">Adicionar Evolução</button>
+  <div>
+    @for (evo of evolutions; track evo.id) {
+    <nb-card class="mb-3">
+      <nb-card-header>
+        <label> Data: </label>
+        <input nbInput type="date" [(ngModel)]="evo.date" />
+      </nb-card-header>
+      <nb-card-body>
+        <label> Evolução: </label>
+        <textarea nbInput fullWidth rows="4" [(ngModel)]="evo.text" placeholder="Descreva a evolução"></textarea>
+      </nb-card-body>
+      <nb-card-footer>
+        <button nbButton size="small" status="success" (click)="saveEvolution(evo)">Salvar</button>
+        <button nbButton size="small" status="danger" (click)="deleteEvolution(evo)">Excluir</button>
+      </nb-card-footer>
+    </nb-card>
+    }
+  </div>
+</div>
