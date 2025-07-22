@@ -32,6 +32,14 @@ export function createTables(): void {
         dataAtualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
 
+      CREATE TABLE IF NOT EXISTS patient_evolutions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        patientId INTEGER NOT NULL,
+        date TEXT NOT NULL,
+        text TEXT NOT NULL,
+        FOREIGN KEY (patientId) REFERENCES patients(id) ON DELETE CASCADE
+      );
+
       CREATE TABLE IF NOT EXISTS patient_documents (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         paciente_id INTEGER NOT NULL,
