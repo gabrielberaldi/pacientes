@@ -26,13 +26,8 @@ export class PatientRepository {
 
   static create(patient: PatientRegisterDto): Promise<number> {
     return new Promise((resolve, reject) => {
-      const query = `
-        INSERT INTO patients (
-          nome, dataNascimento, sexo, contato, nomePai, nomeMae, bairro,
-          cep, logradouro, tipoLogradouro, numero, diaDaSessao,
-          horario
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `;
+      const query = `INSERT INTO patients (nome, dataNascimento, sexo, contato, nomePai, nomeMae, bairro,
+          cep, logradouro, tipoLogradouro, numero, diaDaSessao, horario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
       const values = [
         patient.nome,

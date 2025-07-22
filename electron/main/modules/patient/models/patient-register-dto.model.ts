@@ -1,3 +1,5 @@
+import { Evolution } from "./evolution.model";
+
 export interface PatientRegisterDto {
   id?: number;
   nome: string;
@@ -13,4 +15,5 @@ export interface PatientRegisterDto {
   numero?: string;
   diaDaSessao: string;
   horario: string;
+  evolucoes?: Evolution[];
 }

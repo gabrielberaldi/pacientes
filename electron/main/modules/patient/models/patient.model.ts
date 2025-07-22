@@ -1,3 +1,5 @@
+import { Evolution } from "./evolution.model";
+
 export interface Patient {
   id?: number;
   nome: string;
@@ -15,4 +17,5 @@ export interface Patient {
   horario: string;
   dataCriacao: string;
   dataAtualizacao: string;
+  evolucoes: Evolution[];
 }
