@@ -90,12 +90,4 @@
     }
   </div>
 
-  <div>
-    <label>Evolução</label>
-    <textarea nbInput fullWidth placeholder="Digite a evolução" [formControl]="getControl('evolucao')"></textarea>
-    @if (getControl('evolucao').invalid && getControl('evolucao').touched) {
-      <div style="color: red; font-size: 12px;">Evolução é obrigatória</div>
-    }
-  </div>
-
 </div>

@@ -21,17 +21,17 @@ export class TableComponent {
 
   columns = input.required<string[]>();
   data = input.required<TreeNode<any>[]>();
-  dataSource!: NbTreeGridDataSource<any>;
   sortColumn = input<string>('');
   sortDirection = input<NbSortDirection>(NbSortDirection.ASCENDING);
-
-  event = output<TableEvent<any>>()
+  event = output<TableEvent<any>>();
+  
+  dataSource!: NbTreeGridDataSource<any>;
 
   constructor(
     private _dataSourceBuilder: NbTreeGridDataSourceBuilder<any>,
     private _router: Router
   ) {
-    effect(() => { this.dataSource = this._dataSourceBuilder.create(this.data()); })
+    effect(() => { this.dataSource = this._dataSourceBuilder.create(this.data()) })
   }
 
   add(): void {
@@ -56,7 +56,4 @@ export class TableComponent {
     // this.sortColumn = sortRequest.column;
     // this.sortDirection = sortRequest.direction;
   }
-
- 
- 
 }

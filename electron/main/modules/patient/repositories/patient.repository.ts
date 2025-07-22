@@ -30,8 +30,8 @@ export class PatientRepository {
         INSERT INTO patients (
           nome, dataNascimento, sexo, contato, nomePai, nomeMae, bairro,
           cep, logradouro, tipoLogradouro, numero, diaDaSessao,
-          horario, evolucao
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          horario
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
 
       const values = [
@@ -48,7 +48,6 @@ export class PatientRepository {
         patient.numero ?? null,
         patient.diaDaSessao,
         patient.horario,
-        patient.evolucao
       ];
 
       db.run(query, values, function (err) {

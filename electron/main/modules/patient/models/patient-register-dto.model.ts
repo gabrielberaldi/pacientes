@@ -13,5 +13,4 @@ export interface PatientRegisterDto {
   numero?: string;
   diaDaSessao: string;
   horario: string;
-  evolucao: string;
 }

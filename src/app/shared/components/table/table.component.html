@@ -36,5 +36,16 @@
         </ng-container>
         }
     </table>
+    <!-- <nav class="tw-flex tw-justify-center tw-mt-4">
+      <button nbButton size="small" (click)="previousPage()" [disabled]="page === 1">Anterior</button>
+      <span class="tw-mx-2">Página {{ page }}</span>
+      <button 
+        nbButton 
+        size="small"
+        (click)="nextPage()"
+        [disabled]="page * pageSize >= data().length">
+        Próxima
+      </button>
+    </nav> -->
   </nb-card-body>
 </nb-card>

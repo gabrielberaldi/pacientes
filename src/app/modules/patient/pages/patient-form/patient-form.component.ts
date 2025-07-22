@@ -31,7 +31,6 @@ export class PatientFormComponent implements OnInit {
     numero: [''],
     diaDaSessao: [null, Validators.required],
     horario: ['', Validators.required],
-    evolucao: ['', Validators.required],
   });
 
   constructor(
@@ -60,7 +59,8 @@ export class PatientFormComponent implements OnInit {
       return;
     }
     
-    this._patientService.create(this.formGroup.value).subscribe(tste => console.log(tste));
+    if (!this.id.value) this._patientService.create(this.formGroup.value).subscribe(({ id }) => this._router.navigate([`/layout/patient/edit/${id}`]));
+    else this._patientService.update(this.formGroup.value).subscribe();
   }
 
   private _getData(): void {

@@ -13,7 +13,6 @@ export interface Patient {
   numero: string;
   diaDaSessao: string;
   horario: string;
-  evolucao: string;
   dataCriacao: string;
   dataAtualizacao: string;
 }

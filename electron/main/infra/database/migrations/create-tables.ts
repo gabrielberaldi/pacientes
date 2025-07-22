@@ -28,7 +28,6 @@ export function createTables(): void {
         numero TEXT,
         diaDaSessao TEXT NOT NULL,
         horario TEXT NOT NULL,
-        evolucao TEXT NOT NULL,
         dataCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         dataAtualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
