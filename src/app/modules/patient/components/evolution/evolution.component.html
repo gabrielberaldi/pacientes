@@ -1,21 +1,20 @@
-<div style="display: flex; flex-direction: column; gap: 20px;">
-  <button nbButton status="success" style="float: right;" (click)="addEvolution()">Adicionar Evolução</button>
-  <div>
-    @for (evo of evolutions; track evo.id) {
-    <nb-card class="mb-3">
-      <nb-card-header>
-        <label> Data: </label>
-        <input nbInput type="date" [(ngModel)]="evo.date" />
-      </nb-card-header>
-      <nb-card-body>
-        <label> Evolução: </label>
-        <textarea nbInput fullWidth rows="4" [(ngModel)]="evo.text" placeholder="Descreva a evolução"></textarea>
-      </nb-card-body>
-      <nb-card-footer>
-        <button nbButton size="small" status="success" (click)="saveEvolution(evo)">Salvar</button>
-        <button nbButton size="small" status="danger" (click)="deleteEvolution(evo)">Excluir</button>
-      </nb-card-footer>
-    </nb-card>
+<div style="display: flex; flex-direction: column; gap: 20px;" [formGroup]="formGroup()">
+  <nb-list formArrayName="evolucoes">
+    @for (evolutionControl of evolutionArray.controls; let i = $index; track $index) {
+    <nb-list-item class="evolution-item">
+      <div class="evolution-text">
+        <span>
+          <strong>Data:</strong>
+          {{ evolutionControl.value.date }}
+        </span>
+        <span>{{ evolutionControl.value.text }}</span>
+      </div>
+      <div class="evolution-actions">
+        <button nbButton size="small" status="info" (click)="addEditEvolution()">Editar</button>
+        <button nbButton size="small" status="danger" (click)="deleteEvolution(i)">Excluir</button>
+      </div>
+    </nb-list-item>
     }
-  </div>
+  </nb-list>
+  <button nbButton status="success" (click)="addEditEvolution()">Adicionar Evolução</button>
 </div>

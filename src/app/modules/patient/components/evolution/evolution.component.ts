@@ -1,12 +1,12 @@
-import { Component, input } from '@angular/core';
-import { FormGroup, FormsModule } from '@angular/forms';
+import { Component, effect, input } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NbButtonModule, NbCardModule, NbDatepickerModule, NbInputModule, NbListModule } from '@nebular/theme';
 import { Evolution } from '../../models/evolution.model';
 
 @Component({
   selector: 'app-evolution',
   standalone: true,
-  imports: [NbListModule, NbCardModule, NbButtonModule, FormsModule, NbInputModule, NbDatepickerModule],
+  imports: [NbListModule, NbCardModule, NbButtonModule, NbInputModule, NbDatepickerModule, NbListModule, ReactiveFormsModule ],
   templateUrl: './evolution.component.html',
   styleUrl: './evolution.component.scss'
 })
@@ -14,37 +14,18 @@ export class EvolutionComponent {
 
   formGroup = input.required<FormGroup>();
 
-  evolutions: Evolution[] = [
-    {
-      id: 1,
-      patientId: 123,
-      date: '2025-07-20',
-      text: 'Paciente apresentou melhora significativa na mobilidade do joelho esquerdo.'
-    },
-    {
-      id: 2,
-      patientId: 123,
-      date: '2025-07-15',
-      text: 'Queixas de dor moderada durante a manhã, recomendada fisioterapia.'
-    },
-    {
-      id: 3,
-      patientId: 123,
-      date: '2025-07-10',
-      text: 'Primeira avaliação, paciente com limitação de movimento e dor aguda.'
-    }
-  ]
-
-
-  saveEvolution(any: any): void {
-
+  addEditEvolution(evolution?: Evolution): void {
+    if (!!evolution) {}
+    else {}
   }
 
-  deleteEvolution(any: any): void {
-
+  deleteEvolution(index: number): void {
+    this.evolutionArray.removeAt(index);
   }
-
-  addEvolution(): void {
-
+  
+  get evolutionArray(): FormArray {
+    console.log(this.formGroup().get('evolucoes'));
+    
+    return this.formGroup().get('evolucoes') as FormArray;
   }
 }

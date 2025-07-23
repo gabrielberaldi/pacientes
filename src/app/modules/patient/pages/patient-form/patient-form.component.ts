@@ -1,12 +1,13 @@
 import { NgFor, NgIf, NgSwitchCase } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NbButtonModule, NbCardModule, NbFormFieldModule, NbTabsetModule } from '@nebular/theme';
 import { PatientService } from '../../services/patient.service';
 import { InformationComponent } from '../../components/information/information.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { parse, parseISO } from 'date-fns'
+import { parseISO } from 'date-fns'
 import { EvolutionComponent } from '../../components/evolution/evolution.component';
+import { Evolution } from '../../models/evolution.model';
 
 @Component({
   selector: 'app-patient-form',
@@ -67,13 +68,35 @@ export class PatientFormComponent implements OnInit {
 
   private _getData(): void {
     const id = Number(this._actvatedRoute.snapshot.params['id']);
-    if (!!id) this._patientService.getById(id).subscribe(patient => {
+    if (!id) return
+    this._patientService.getById(id).subscribe(patient => {
       this.formGroup.patchValue({ ...patient, dataNascimento: parseISO(patient.dataNascimento) })
+      this._addControlsToFormArray(patient.evolucoes);
     });
+  }
+
+  private _addControlsToFormArray(evolutions: Evolution[]): void {
+    for (const evolution of evolutions) {
+      const group = this._newFormGroup()
+      group.setValue(evolution);
+      this.evolutionArray.push(group);
+    }
+  }
+  
+  private _newFormGroup(): FormGroup {
+    return this._fb.group({
+      id: [null],
+      date: ['', Validators.required],
+      text: ['', Validators.required]
+    })
   }
   
   get id(): FormControl {
     return this.formGroup.get('id') as FormControl;
+  }
+
+  private get evolutionArray(): FormArray {
+    return this.formGroup.get('evolucoes') as FormArray;
   }
   
 }
