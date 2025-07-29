@@ -6,7 +6,7 @@ export class PatientEvolutionRepository {
 
   static getAllByPatientId(patientId: number): Promise<Evolution[]> {
     return new Promise((resolve, reject) => {
-      db.all<Evolution>("SELECT * FROM patient_evolutions WHERE patientId = ? ORDER BY date DESC", [patientId], (err, rows) => {
+      db.all<Evolution>("SELECT id, date, text FROM patient_evolutions WHERE patientId = ? ORDER BY date DESC", [patientId], (err, rows) => {
         if (err) reject(err);
         else resolve(rows);
       });
@@ -15,7 +15,7 @@ export class PatientEvolutionRepository {
 
   static getById(id: number): Promise<Evolution | undefined> {
     return new Promise((resolve, reject) => {
-      db.get<Evolution>("SELECT * FROM patient_evolutions WHERE id = ?", [id], (err, row) => {
+      db.get<Evolution>("SELECT id, date, text FROM patient_evolutions WHERE id = ?", [id], (err, row) => {
         if (err) reject(err);
         else resolve(row ?? undefined);
       });

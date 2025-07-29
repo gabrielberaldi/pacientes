@@ -5,12 +5,12 @@
       <div class="evolution-text">
         <span>
           <strong>Data:</strong>
-          {{ evolutionControl.value.date }}
+          {{ evolutionControl.value.date | date: 'dd/MM/yyyy' }}
         </span>
         <span>{{ evolutionControl.value.text }}</span>
       </div>
       <div class="evolution-actions">
-        <button nbButton size="small" status="info" (click)="addEditEvolution()">Editar</button>
+        <button nbButton size="small" status="info" (click)="addEditEvolution(evolutionControl.value, i)">Editar</button>
         <button nbButton size="small" status="danger" (click)="deleteEvolution(i)">Excluir</button>
       </div>
     </nb-list-item>

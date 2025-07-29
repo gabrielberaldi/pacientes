@@ -61,7 +61,6 @@ export class PatientFormComponent implements OnInit {
       this.formGroup.markAsDirty();
       return;
     }
-    
     if (!this.id.value) this._patientService.create(this.formGroup.value).subscribe(({ id }) => this._router.navigate([`/layout/patient/edit/${id}`]));
     else this._patientService.update(this.formGroup.value).subscribe();
   }
@@ -76,9 +75,10 @@ export class PatientFormComponent implements OnInit {
   }
 
   private _addControlsToFormArray(evolutions: Evolution[]): void {
+    if (!evolutions || !evolutions.length) return;
     for (const evolution of evolutions) {
       const group = this._newFormGroup()
-      group.setValue(evolution);
+      group.patchValue(evolution);
       this.evolutionArray.push(group);
     }
   }

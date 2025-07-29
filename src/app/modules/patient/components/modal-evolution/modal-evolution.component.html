@@ -1,0 +1,30 @@
+<nb-card accent="primary">
+  <nb-card-header>
+    {{ title }}
+  </nb-card-header>
+  <nb-card-body>
+    <div>
+      <label>Data</label>
+      <input nbInput fullWidth [nbDatepicker]="datepicker" placeholder="Selecione a data" [formControl]="getControl('date')" />
+      <nb-datepicker #datepicker></nb-datepicker>
+      @if (getControl('date').invalid && getControl('date').touched) {
+        <div style="color: red; font-size: 12px;">
+          Campo obrigatório.
+        </div>
+      }
+    </div>
+    <div>
+      <label>Texto:</label>
+      <textarea nbInput fullWidth placeholder="Digite a evolução..." rows="10" resise="false" [formControl]="getControl('text')"></textarea>
+       @if (getControl('text').invalid && getControl('text').touched) {
+        <div style="color: red; font-size: 12px;">
+          Campo obrigatório.
+        </div>
+      }
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button fullWidth nbButton status="success" (click)="save()">Salvar</button>
+    <button fullWidth nbButton status="danger" (click)="close()">Fechar</button>
+  </nb-card-footer>
+</nb-card>

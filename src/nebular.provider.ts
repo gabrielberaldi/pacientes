@@ -1,5 +1,5 @@
 import { importProvidersFrom } from '@angular/core';
-import { NbDatepickerModule, NbGlobalPhysicalPosition, NbMenuModule, NbSidebarModule, NbThemeModule, NbToastrConfig, NbToastrModule } from '@nebular/theme';
+import { NbDatepickerModule, NbDialogModule, NbGlobalPhysicalPosition, NbMenuModule, NbSidebarModule, NbThemeModule, NbToastrConfig, NbToastrModule } from '@nebular/theme';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -15,5 +15,6 @@ export function provideNebular() {
       format: 'dd/MM/yyyy',
     }),
     NbDatepickerModule.forRoot(),
+    NbDialogModule.forRoot()
   );
 }

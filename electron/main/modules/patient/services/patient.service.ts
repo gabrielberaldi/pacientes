@@ -5,6 +5,7 @@ import { PatientRegisterDto } from "../models/patient-register-dto.model";
 import { Patient } from "../models/patient.model";
 import { PatientEvolutionRepository } from "../repositories/patient-evolution.repository";
 import { PatientRepository } from "../repositories/patient.repository";
+import { PatientEvolutionService } from "./patient-evolution.service";
 
 export class PatientService {
 
@@ -28,14 +29,6 @@ export class PatientService {
     return patient;
   }
 
-  // static async updatePatient({ id, ...patient }: RequireId<PatientRegisterDto>): Promise<void> {
-  //   const existing = await PatientRepository.getById(id);
-  //   if (!existing) throw new Error(`Paciente com id ${id} não encontrado`);
-  //   const dtoToPersist = { ...patient };
-  //   dtoToPersist.dataNascimento = new Date(dtoToPersist.dataNascimento).toISOString().split('T')[0];
-  //   await PatientRepository.update({ id, ...dtoToPersist });
-  // }
-
   static async updatePatient(patientDto: RequireId<PatientRegisterDto>): Promise<void> {
     const { evolucoes, ...patientData } = patientDto;
     const existing = await PatientRepository.getById(patientDto.id);
@@ -43,27 +36,11 @@ export class PatientService {
     const dtoToPersist = { ...patientData };
     dtoToPersist.dataNascimento = new Date(dtoToPersist.dataNascimento).toISOString().split('T')[0];
     await PatientRepository.update({ ...dtoToPersist });
-
-    if (!evolucoes) return;
-    const currentEvolutions = await PatientEvolutionRepository.getAllByPatientId(patientDto.id);
-    const receivedIds = evolucoes.filter(e => e.id).map(e => e.id!);
-    const toDelete = currentEvolutions.filter(e => !receivedIds.includes(e.id as number));
-
-    await Promise.all(toDelete.map(evo => PatientEvolutionRepository.delete(evo.id as number)));
-
-    await Promise.all(evolucoes.map(evo => {
-      if (evo.id) {
-        return PatientEvolutionRepository.update(evo as RequireId<Evolution>);
-      } else {
-        return PatientEvolutionRepository.create({
-          patientId: patientDto.id,
-          date: evo.date,
-          text: evo.text,
-        });
-      }})
-    );
-
+    if (evolucoes) {
+      await PatientEvolutionService.syncEvolutions(patientDto.id, evolucoes);
+    }
   }
+
 
   static async deletePatient(id: number): Promise<void> {
     const existing = await PatientRepository.getById(id);
