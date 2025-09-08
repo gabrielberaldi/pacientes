@@ -47,13 +47,13 @@ export class PatientListComponent implements OnInit {
   private _add(): void {
     this._router.navigate([`/layout/patient/edit`]);
   }
+  
+  private _delete({ id }: PatientList) {
+    this._patientService.delete(id).subscribe(() => this.data = this.data.filter(({ data }) => data.id !== id));
+  }
 
   private _edit(data: PatientList) {
     this._router.navigate([`/layout/patient/edit/${data.id}`]);
-  }
-
-  private _delete(data: PatientList) {
-    this._patientService.delete(data.id).subscribe(() => {});
   }
 
 }

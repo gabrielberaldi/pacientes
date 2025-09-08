@@ -30,7 +30,7 @@
 
   <div>
     <label>Contato</label>
-    <input nbInput fullWidth placeholder="(xx) xxxxx-xxxx" [formControl]="getControl('contato')" />
+    <input appPhoneMask nbInput fullWidth placeholder="(xx) xxxxx-xxxx" [formControl]="getControl('contato')" />
     @if (getControl('contato').invalid && getControl('contato').touched) {
       <div style="color: red; font-size: 12px;">Contato é obrigatório</div>
     }

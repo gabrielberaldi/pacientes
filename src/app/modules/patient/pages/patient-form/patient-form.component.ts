@@ -12,7 +12,7 @@ import { Evolution } from '../../models/evolution.model';
 @Component({
   selector: 'app-patient-form',
   standalone: true,
-  imports: [ NbTabsetModule, NbCardModule, NbButtonModule, NbFormFieldModule, ReactiveFormsModule, NgIf, NgFor, NgSwitchCase, InformationComponent, EvolutionComponent ],
+  imports: [ NbTabsetModule, NbCardModule, NbButtonModule, NbFormFieldModule, ReactiveFormsModule, NgIf, NgFor, NgSwitchCase, InformationComponent, EvolutionComponent],
   templateUrl: './patient-form.component.html',
   styleUrl: './patient-form.component.scss'
 })
@@ -56,6 +56,8 @@ export class PatientFormComponent implements OnInit {
   }
 
   save(): void {
+    console.log(this.formGroup.value);
+    
     if (this.formGroup.invalid) {
       this.formGroup.markAllAsTouched();
       this.formGroup.markAsDirty();

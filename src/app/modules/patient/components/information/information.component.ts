@@ -3,11 +3,12 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NbDatepickerModule, NbInputModule, NbOptionModule, NbSelectModule } from '@nebular/theme';
 import { Option } from '../../../../shared/model/option.model';
 import { SessionDay } from '../../models/session-day.enum';
+import { PhoneMaskDirective } from '../../../../shared/directive/phone-mask.directive';
 
 @Component({
   selector: 'app-information',
   standalone: true,
-  imports: [ NbInputModule, NbOptionModule, NbSelectModule, NbDatepickerModule, ReactiveFormsModule],
+  imports: [ PhoneMaskDirective, NbInputModule, NbOptionModule, NbSelectModule, NbDatepickerModule, ReactiveFormsModule],
   templateUrl: './information.component.html',
   styleUrl: './information.component.scss'
 })
