@@ -5,7 +5,7 @@ import { TreeNode } from '../../shared/components/table/model/tree-node.model';
 
 export abstract class BaseIpcService<T, R> {
 
-  private readonly _nbToastrsService = inject(NbToastrService);
+  private readonly _nbToastrService = inject(NbToastrService);
 
   constructor(
     private _path: string
@@ -16,7 +16,7 @@ export abstract class BaseIpcService<T, R> {
       .pipe(
         map(response => response.map(item => ({ data: item }))),
         catchError((error: Error) => {
-          this._nbToastrsService.danger(error.message || 'Erro desconhecido', 'Erro');
+          this._nbToastrService.danger(error.message || 'Erro desconhecido', 'Erro');
           return throwError(() => error);
         }),
       );
@@ -26,7 +26,7 @@ export abstract class BaseIpcService<T, R> {
     return from(window.electron.invoke<T>(`${this._path}:getById`, id ))
       .pipe(
         catchError((error: Error) => {
-          this._nbToastrsService.danger(error.message || 'Erro desconhecido', 'Erro');
+          this._nbToastrService.danger(error.message || 'Erro desconhecido', 'Erro');
           return throwError(() => error);
         }),
       );
@@ -35,9 +35,9 @@ export abstract class BaseIpcService<T, R> {
   create(data: T): Observable<T> {
     return from(window.electron.invoke<T>(`${this._path}:create`, data))
       .pipe(
-        tap(() => this._nbToastrsService.success('Registro criado com sucesso!', 'Sucesso')),
+        tap(() => this._nbToastrService.success('Registro criado com sucesso!', 'Sucesso')),
         catchError((error: Error) => {
-          this._nbToastrsService.danger(error.message || 'Erro desconhecido', 'Erro');
+          this._nbToastrService.danger(error.message || 'Erro desconhecido', 'Erro');
           return throwError(() => error);
         }),
       );
@@ -46,9 +46,9 @@ export abstract class BaseIpcService<T, R> {
   update(data: T): Observable<T> {
     return from(window.electron.invoke<T>(`${this._path}:update`, data))
       .pipe(
-        tap(() => this._nbToastrsService.success('Registro atualizado com sucesso!', 'Sucesso')),
+        tap(() => this._nbToastrService.success('Registro atualizado com sucesso!', 'Sucesso')),
         catchError((error: Error) => {
-          this._nbToastrsService.danger(error.message || 'Erro desconhecido', 'Erro');
+          this._nbToastrService.danger(error.message || 'Erro desconhecido', 'Erro');
           return throwError(() => error);
         }),
       );
@@ -57,9 +57,9 @@ export abstract class BaseIpcService<T, R> {
   delete(id: number): Observable<T> {
     return from(window.electron.invoke<T>(`${this._path}:delete`, id ))
       .pipe(
-        tap(() => this._nbToastrsService.success('Registro excluído com sucesso!', 'Sucesso')),
+        tap(() => this._nbToastrService.success('Registro excluído com sucesso!', 'Sucesso')),
         catchError((error: Error) => {
-          this._nbToastrsService.danger(error.message || 'Erro desconhecido', 'Erro');
+          this._nbToastrService.danger(error.message || 'Erro desconhecido', 'Erro');
           return throwError(() => error);
         }),
       );

@@ -56,8 +56,6 @@ export class PatientFormComponent implements OnInit {
   }
 
   save(): void {
-    console.log(this.formGroup.value);
-    
     if (this.formGroup.invalid) {
       this.formGroup.markAllAsTouched();
       this.formGroup.markAsDirty();
