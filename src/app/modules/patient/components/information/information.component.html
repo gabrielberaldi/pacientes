@@ -58,12 +58,18 @@
 
   <div>
     <label>Tipo de Logradouro</label>
-    <input nbInput fullWidth [formControl]="getControl('tipoLogradouro')" />
+    <nb-select fullWidth placeholder="Rua, Avenida..." [formControl]="getControl('tipoLogradouro')">
+      @for(street of streetTypes; track street.value) {
+        <nb-option [value]="street.value">
+          {{ street.label }}
+        </nb-option>
+      }
+    </nb-select>
   </div>
  
   <div>
     <label>Logradouro</label>
-    <input nbInput fullWidth placeholder="Rua, Avenida..." [formControl]="getControl('logradouro')" />
+    <input nbInput fullWidth placeholder="" [formControl]="getControl('logradouro')" />
   </div>
 
   <div>
